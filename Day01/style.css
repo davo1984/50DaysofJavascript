@@ -60,3 +60,15 @@ body {
         display: none;
     }
 }
+
+@media(max-width: 600px) {
+    .container {
+        width: 100vw;
+    }
+    .panel:nth-of-type(6),
+    .panel:nth-of-type(7),
+    .panel:nth-of-type(8),
+    .panel:nth-of-type(9) {
+        display: none;
+    }
+}

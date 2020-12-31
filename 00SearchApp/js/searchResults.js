@@ -8,7 +8,7 @@ export const deleteSearchResults = () => {
 }
 
 export const buildSearchResults = (resultArray) => {
-    resultArray.forEach(result => {
+    resultArray.forEach((result) => {
         const resultItem = createResultItem(result)
         const resultContents = document.createElement("div")
         resultContents.classList.add("resultContents")
@@ -22,40 +22,40 @@ export const buildSearchResults = (resultArray) => {
         const searchResults = document.getElementById("searchResults")
         searchResults.append(resultItem)
     })
+}
 
-    const createResultItem = (result) => {
-        const resultItem = document.createElement("div")
-        resultItem.classList.add("resultItem")
-        const resultTitle = document.createElement("div")
-        resultTitle.classList.add("resultTitle")
-        const link = document.createElement("a")
-        link.href = `https://en.wikipedia.org/?curid=${result.id}`
-        link.textContent = resultTitle
-        link.target = "_blank"
-        resultTitle.append(link)
-        resultItem.append(resultTitle)
-        return resultTitle
-    }
+const createResultItem = (result) => {
+    const resultItem = document.createElement("div");
+    resultItem.classList.add("resultItem");
+    const resultTitle = document.createElement("div");
+    resultTitle.classList.add("resultTitle");
+    const link = document.createElement("a");
+    link.href = `https://en.wikipedia.org/?curid=${result.id}`;
+    link.textContent = result.title;
+    link.target = "_blank";
+    resultTitle.append(link);
+    resultItem.append(resultTitle);
+    return resultItem;
+};
 
-    const createResultImage = (result) => {
-        const resultImage = document.createElement("div")
-        resultImage.classList.add("resultImage")
-        const img = document.createElement("img")
-        img.src = result.img
-        img.alt = result.title
-        resultImage.append(img)
-        return createResultImage
-    }
+const createResultImage = (result) => {
+    const resultImage = document.createElement("div")
+    resultImage.classList.add("resultImage")
+    const img = document.createElement("img")
+    img.src = result.img
+    img.alt = result.title
+    resultImage.append(img)
+    return resultImage
+}
 
-    const createResultText = (result) => {
-        const resultText = document.createElement("div")
-        resultText.classList.add("resultText")
-        const resultDescription = document.createElement("p")
-        resultDescription.classList.add("resultDescription")
-        resultDescription.textContent = result.textContent
-        resultText.append(resultDescription)
-        return resultText
-    }
+const createResultText = (result) => {
+    const resultText = document.createElement("div")
+    resultText.classList.add("resultText")
+    const resultDescription = document.createElement("p")
+    resultDescription.classList.add("resultDescription")
+    resultDescription.textContent = result.text
+    resultText.append(resultDescription)
+    return resultText
 }
 
 export const clearStatsLine = () => {
@@ -63,7 +63,7 @@ export const clearStatsLine = () => {
 }
 
 export const setStatsLine = (numberOfResults) => {
-    const statLine = document.getElementById('stats')
+    const statsLine = document.getElementById('stats')
     if (numberOfResults) {
         statsLine.textContent = 'Displaying ${numberOfResults} results.'
     } else {

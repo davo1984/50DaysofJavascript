@@ -6,27 +6,30 @@ export const getSearchTerm = () => {
 }
 
 export const retrieveSearchResults = async(searchTerm) => {
-    const wikiSearchString = getWikiSearchString(searchTerm)
-    const wikiSearchResults = await requestData(wikiSearchString)
-    let resultArray = []
+    const wikiSearchString = getWikiSearchString(searchTerm);
+    const wikiSearchResults = await requestData(wikiSearchString);
+    let resultArray = [];
+    console.log("in dataFunctoins.js: retrieveSearchResults resultArray >" + resultArray +
+        "< wikiSearchResults >" + wikiSearchResults + "< wikiSearchString >" + wikiSearchString + "< searchTerm >" + searchTerm)
     if (wikiSearchResults.hasOwnProperty("query")) {
-        resultArray = processWikiResults(wikiSearchResults.query.pages)
+        resultArray = processWikiResults(wikiSearchResults.query.pages);
     }
-    return resultArray
-}
+    return resultArray;
+};
 
 const getWikiSearchString = (searchTerm) => {
     const maxChars = getMaxChars()
+    console.log("maxChars " + maxChars)
     const rawSearchString = `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${searchTerm}&gsrlimit=20&prop=pageimages|extracts&exchars=${maxChars}&exintro&explaintext&exlimit=max&format=json&origin=*`
     const searchString = encodeURI(rawSearchString)
-    return searchTerm
+    return searchString
 }
 
 const getMaxChars = () => {
     const width = window.innerWidth || document.body.clientWidth
     let maxChars;
     if (width < 414) maxChars = 65
-    if (width <= 414 && width < 1400) maxChars = 100
+    if (width >= 414 && width < 1400) maxChars = 100
     if (width >= 1400) maxChars = 130
     return maxChars
 }
@@ -42,20 +45,21 @@ const requestData = async(searchString) => {
 }
 
 const processWikiResults = (results) => {
-    const resultArray = []
-    Object.keys(results).array.forEach(key => {
-        const id = key
-        const title = results[key.title]
-        const text = results[key].extract
+    const resultArray = [];
+    Object.keys(results).forEach((key) => {
+        const id = key;
+        const title = results[key].title;
+        const text = results[key].extract;
         const img = results[key].hasOwnProperty("thumbnail") ?
-            results[key].thumbnail.source : null
+            results[key].thumbnail.source :
+            null;
         const item = {
             id: id,
             title: title,
             img: img,
             text: text
-        }
-        resultArray.push(item)
+        };
+        resultArray.push(item);
     });
-    return resultArray
-}
+    return resultArray;
+};

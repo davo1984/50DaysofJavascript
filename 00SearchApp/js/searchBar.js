@@ -13,3 +13,19 @@ export const showClearTextButton = () => {
         clear.classList.remove("flex")
     }
 }
+
+export const clearSearchText = (e) => {
+    e.preventDefault()
+    document.getElementById("search").value = ""
+    const clear = document.getElementById("clear")
+    clear.classList.add("none")
+    clear.classList.remove("flex")
+    setSearchFocus()
+}
+
+export const clearPushListener = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault()
+        document.getElementById("clear").click()
+    }
+}

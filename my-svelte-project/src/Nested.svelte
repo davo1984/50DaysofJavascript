@@ -1,5 +1,8 @@
 <script>
-    let name = "world";
+    export let name = "world";
+    $: if (!name) {
+        name = "world";
+    }
 </script>
 
 <style>
@@ -14,4 +17,4 @@
 
 <h1>Hello {name}!</h1>
 
-<input type="text" bind:value={name} /><br />
+<!-- <input type="text" bind:value={name} /><br /> -->
